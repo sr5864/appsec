@@ -6,7 +6,6 @@
  * Date: 8 July 2020
  */
 
-//will this work??
 
 #include "giftcard.h"
 
