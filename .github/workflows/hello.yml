@@ -7,9 +7,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run a one-line script
-        - run: echo "Hello, world"
-      -name: Run a multi-line script
-        - run: gcc -o giftcardreader giftcardreader.c
-        - run: ./giftcardreader 1 part2/crash1.gft
+        run: echo "Hello, world"
+      - name: Run a multi-line script
+        run: gcc -o giftcardreader giftcardreader.c
+        run: ./configure
+        run: ./giftcardreader 1 part2/crash1.gft
         - run: ./giftcardreader 1 part2/crash2.gft
         - run: ./giftcardreader 1 part2/hang.gft
