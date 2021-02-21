@@ -5,7 +5,7 @@
  * Maintainer:
  * Date: 8 July 2020
  */
-//hello
+
 
 #include "giftcard.h"
 
@@ -187,6 +187,9 @@ struct this_gift_card *gift_card_reader(FILE *input_fd) {
 
 		// Make something the size of the rest and read it in
 		ptr = malloc(ret_val->num_bytes);
+        // //if (ptf == 0x00){
+        //     exit(0)
+        // }
 		fread(ptr, ret_val->num_bytes, 1, input_fd);
 
         optr = ptr-4;
@@ -265,6 +268,5 @@ int main(int argc, char **argv) {
 	thisone = gift_card_reader(input_fd);
 	if (argv[1][0] == '1') print_gift_card_info(thisone);
     else if (argv[1][0] == '2') gift_card_json(thisone);
-
 	return 0;
 }
