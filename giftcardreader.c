@@ -16,6 +16,8 @@
 void animate(char *msg, unsigned char *program) {
     unsigned char regs[16];
     char *mptr = msg;
+    int MAX_OPS = 200000;
+    int instruction_counter = 0;
     unsigned char *pc = program;
     int i = 0;
     int zf = 0;
@@ -28,6 +30,10 @@ void animate(char *msg, unsigned char *program) {
             case 0x00:
                 break;
             case 0x01:
+                if(arg1 > 15 || arg1 < 0 ){
+                    printf("Oh!!! you crazyyyy!!! BYE!!!\n");
+                    break;
+                }
                 regs[arg1] = *mptr;
                 break;
             case 0x02:
@@ -60,7 +66,12 @@ void animate(char *msg, unsigned char *program) {
                 break;
         }
         pc+=3;
+        instruction_counter += 1;
         if (pc > program+256) break;
+        if (instruction_counter >= MAX_OPS){
+            printf("SO MANY INSTRUCTIONS? Don't you have better things to do?????\n");
+            break;
+        }
     }
 done:
     return;
@@ -187,9 +198,10 @@ struct this_gift_card *gift_card_reader(FILE *input_fd) {
 
 		// Make something the size of the rest and read it in
 		ptr = malloc(ret_val->num_bytes);
-        // //if (ptf == 0x00){
-        //     exit(0)
-        // }
+        if (ptr == 0x00){
+            printf("Oh!!! you need toooooo much  memory! Go get a supercomputer! BYE!!! \n");
+            exit(0);
+        }
 		fread(ptr, ret_val->num_bytes, 1, input_fd);
 
         optr = ptr-4;
