@@ -6,8 +6,6 @@
  * Modification Date: 8 July 2020
  */
 
-//hello
-
 #include <stdio.h>
 #include "giftcard.h"
 
