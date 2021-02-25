@@ -8,8 +8,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run a one-line script
         run: echo "Hello, world"
-      - name: build giftcardexamplewriter
-        run: gcc  giftcardexamplewriter.c -o giftcardexamplewriter
       - name: build giftcardreader 
         run: gcc  giftcardreader.c -o giftcardreader
       - name: Run crash 1
