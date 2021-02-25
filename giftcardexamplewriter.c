@@ -47,7 +47,7 @@ void setupgc() {
 void writegc() {
 	FILE *fd1;
 	// JAC: Why don't any of these check for error return codes?!?
-	fd1 = fopen("crash2.gft","w");
+	fd1 = fopen("cov1.gft","w");
 	fwrite(&examplegc.num_bytes,4,1,fd1);
 	fwrite(examplegcd.merchant_id,32,1,fd1);
 	fwrite(examplegcd.customer_id,32,1,fd1);
@@ -57,10 +57,45 @@ void writegc() {
 /*	fwrite(&examplegcac.amount_added,4,1,fd1);
 	fwrite(examplegcac.actual_signature,32,1,fd1);*/
 	char message[] = "This is a message";
-	/*char program[] = {0x09,-3,0x0};*/
-	char program[] = {0x01, 48+8, 0x0};
+	//char program[] = {0x09,-3,0x0};
+	//char program[] = {0x01, 48+8, 0x0};
+	//char program[] = {0x4, 48+8, 0x0};
+	//char program[] = "This is a message";
+	//char program[] = {0x4, 48+8, 0x0};
+	//fwrite(message, 32, 1, fd1);
+	//fwrite(program, 3, 1, fd1);
+	//char program2[] = {0x03,16,0x0};
+	//fwrite(message, 32, 1, fd1);
+	//fwrite(program2, 3, 1, fd1);
+	//char program3[] = {0x03,1,0x0};
+	//fwrite(message, 32, 1, fd1);
+	//fwrite(program3, 3, 1, fd1);
+	//for (int i = 1; i<9; i++){
+	//	char program[] = {0x00 + i, 48+8, 0x0};
+	//	fwrite(message, 32, 1, fd1);
+	//	fwrite(program, 3, 1, fd1);
+	//}
+	//char program4[] = {0x04,1,0x0};
+	//fwrite(message, 32, 1, fd1);
+	//fwrite(program4, 3, 1, fd1);
+	char program5[] = {0x05,1,0x0};
 	fwrite(message, 32, 1, fd1);
-	fwrite(program, 3, 1, fd1);
+	fwrite(program5, 3, 1, fd1);
+	//char program6[] = {0x06,1,0x0};
+	//fwrite(message, 32, 1, fd1);
+	//fwrite(program6, 3, 1, fd1);
+	//char program7[] = {0x07,1,0x0};
+	//fwrite(message, 32, 1, fd1);
+	//fwrite(program7, 3, 1, fd1);
+	//char program8[] = {0x08,1,0x0};
+	//fwrite(message, 32, 1, fd1);
+	//fwrite(program8, 3, 1, fd1);
+	//char program10[] = {0x010,1,0x0};
+	//fwrite(message, 32, 1, fd1);
+	//fwrite(program10, 3, 1, fd1);
+	//char program1[] = {0x01, 48+8, 0x0};
+	//fwrite(message, 32, 2, fd1);
+	//fwrite(program1, 3, 1, fd1);
 	fclose(fd1);
 }
 

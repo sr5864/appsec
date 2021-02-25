@@ -114,6 +114,7 @@ void print_gift_card_info(struct this_gift_card *thisone) {
 
 // Added to support web functionalities
 void gift_card_json(struct this_gift_card *thisone) {
+	printf("gets here");
     struct gift_card_data *gcd_ptr;
     struct gift_card_record_data *gcrd_ptr;
     struct gift_card_amount_change *gcac_ptr;
