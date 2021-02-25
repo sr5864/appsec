@@ -12,8 +12,6 @@ jobs:
         run: gcc  giftcardexamplewriter.c -o giftcardexamplewriter
       - name: build giftcardreader 
         run: gcc  giftcardreader.c -o giftcardreader
-      - name: run giftcardexamplewriter
-        run: ./giftcardexamplewriter
       - name: Run crash 1
         run: ./giftcardreader 1 part2/crash1.gft
       - name: Run crash 2     
