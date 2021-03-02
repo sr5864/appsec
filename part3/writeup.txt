@@ -1,0 +1,5 @@
+My cov1.gft file makes use of the animate case 0x02 and 0x03 functions.
+My cov2.gft files makes use of the animate case 0x04 function.
+My fuzzer2.gft file expolits the animate case 0x04 function by making arg2 too big for the alloted amount of registers.
+My fuzzer1.gft file exploits the animate case 0x03 function by creating a null pointer.
+I have created fixes for both crashes and some other bug fixes as well such as making sure that the user added a file to read and checing for a null poiter in the animate case 0x02.
