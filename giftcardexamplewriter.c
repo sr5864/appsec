@@ -47,7 +47,7 @@ void setupgc() {
 void writegc() {
 	FILE *fd1;
 	// JAC: Why don't any of these check for error return codes?!?
-	fd1 = fopen("cov1.gft","w");
+	fd1 = fopen("fuzzer2.gft","w");
 	fwrite(&examplegc.num_bytes,4,1,fd1);
 	fwrite(examplegcd.merchant_id,32,1,fd1);
 	fwrite(examplegcd.customer_id,32,1,fd1);
@@ -56,7 +56,7 @@ void writegc() {
 	fwrite(&examplegcrd.type_of_record,4,1,fd1);
 /*	fwrite(&examplegcac.amount_added,4,1,fd1);
 	fwrite(examplegcac.actual_signature,32,1,fd1);*/
-	char message[] = "This is a message";
+	char message[] ="This is a message";
 	//char program[] = {0x09,-3,0x0};
 	//char program[] = {0x01, 48+8, 0x0};
 	//char program[] = {0x4, 48+8, 0x0};
@@ -78,9 +78,9 @@ void writegc() {
 	//char program4[] = {0x04,1,0x0};
 	//fwrite(message, 32, 1, fd1);
 	//fwrite(program4, 3, 1, fd1);
-	char program5[] = {0x05,1,0x0};
+	char program[] = {0x04,0x0,48+8};
 	fwrite(message, 32, 1, fd1);
-	fwrite(program5, 3, 1, fd1);
+	fwrite(program, 3, 1, fd1); 
 	//char program6[] = {0x06,1,0x0};
 	//fwrite(message, 32, 1, fd1);
 	//fwrite(program6, 3, 1, fd1);

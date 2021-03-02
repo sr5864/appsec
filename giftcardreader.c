@@ -30,22 +30,38 @@ void animate(char *msg, unsigned char *program) {
             case 0x00:
                 break;
             case 0x01:
-                if(arg1 > 15 || arg1 < 0 ){
+                if(arg1 > 15 || arg1 < 0){
                     printf("Oh!!! you crazyyyy!!! BYE!!!\n");
                     break;
                 }
                 regs[arg1] = *mptr;
                 break;
             case 0x02:
+            if(arg1 > 15 || arg1 < 0 || regs[arg1] == NULL){
+            	printf("AGAIN?!?!?\n");
+            	exit(0);
+            	}
                 *mptr = regs[arg1];
                 break;
             case 0x03:
+            if(arg1 == NULL){
+            	printf("Null pointer?!?!\n");
+            	exit(0);
+            	}
                 mptr += (char)arg1;
                 break;
             case 0x04:
+            	if(arg2 > 15 || arg2 < 0){
+            		printf("NOOO not enough registers!! \n");
+            		break;
+            	}
                 regs[arg2] = arg1;
                 break;
             case 0x05:
+		/*if(arg2 > 15 || arg2 < 0 || arg1 > 15 || arg1 < 0){
+            		printf("WHat you trying to do?!?! \n");
+            		break;
+            	}*/
                 regs[arg1] ^= regs[arg2];
                 zf = !regs[arg1];
                 break;
@@ -74,6 +90,7 @@ void animate(char *msg, unsigned char *program) {
         }
     }
 done:
+
     return;
 }
 
@@ -98,8 +115,18 @@ void print_gift_card_info(struct this_gift_card *thisone) {
 			}
 		}	
 		else if (gcrd_ptr->type_of_record == 2) {
+				if (gcrd_ptr->actual_record == NULL) { 
+				printf("it is a null ptr");
+				} 
+				else {
+				printf("not a null pointer");
+				}
+
+
 			printf("      record_type: message\n");
+	
 			printf("      message: %s\n",(char *)gcrd_ptr->actual_record);
+			
 		}
 		else if (gcrd_ptr->type_of_record == 3) {
             gcp_ptr = gcrd_ptr->actual_record;
@@ -108,13 +135,13 @@ void print_gift_card_info(struct this_gift_card *thisone) {
             printf("  [running embedded program]  \n");
             animate(gcp_ptr->message, gcp_ptr->program);
 		}
+		
 	}
 	printf("  Total value: %d\n\n",get_gift_card_value(thisone));
 }
 
 // Added to support web functionalities
 void gift_card_json(struct this_gift_card *thisone) {
-	printf("gets here");
     struct gift_card_data *gcd_ptr;
     struct gift_card_record_data *gcrd_ptr;
     struct gift_card_amount_change *gcac_ptr;
@@ -226,6 +253,7 @@ struct this_gift_card *gift_card_reader(FILE *input_fd) {
 			gcrd_ptr = gcd_ptr->gift_card_record_data[i] = malloc(sizeof(struct gift_card_record_data));
 			struct gift_card_amount_change *gcac_ptr;
 			gcac_ptr = gcrd_ptr->actual_record = malloc(sizeof(struct gift_card_record_data));
+		
             struct gift_card_program *gcp_ptr;
 			gcp_ptr = malloc(sizeof(struct gift_card_program));
 
@@ -273,13 +301,19 @@ struct this_gift_card *gift_card_reader(FILE *input_fd) {
 }
 
 // BDG: why not a local variable here?
-struct this_gift_card *thisone;
+//struct this_gift_card *thisone;
 
 int main(int argc, char **argv) {
+struct this_gift_card *thisone;
     // BDG: no argument checking?
 	FILE *input_fd = fopen(argv[2],"r");
-	thisone = gift_card_reader(input_fd);
-	if (argv[1][0] == '1') print_gift_card_info(thisone);
-    else if (argv[1][0] == '2') gift_card_json(thisone);
+	if(input_fd == NULL){
+	printf("No!!! YOu need to give me a file to read!!!\n");
+	}
+	else{
+			thisone = gift_card_reader(input_fd);
+			if (argv[1][0] == '1') print_gift_card_info(thisone);
+    			else if (argv[1][0] == '2') gift_card_json(thisone);
+    	}
 	return 0;
 }
