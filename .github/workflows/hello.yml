@@ -16,11 +16,11 @@ jobs:
         run: ./giftcardreader 1 part2/crash2.gft
       - name: Run crash 3     
         run: ./giftcardreader 1 part2/hang.gft
-      -name: Run cov1
+      - name: Run cov1
         run: ./giftcardreader 1 part3/cov1.gft
-      -name: Run cov2
+      - name: Run cov2
         run: ./giftcardreader 1 part3/cov2.gft
-      -name: Run fuzzer1
+      - name: Run fuzzer1
         run: ./giftcardreader 1 part3/fuzzer1.gft
-      -name: Run fuzzer2
+      - name: Run fuzzer2
         run: ./giftcardreader 1 part3/fuzzer2.gft
